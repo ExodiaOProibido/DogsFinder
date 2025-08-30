@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, Text, TextInput, Button, Image, ScrollView, StyleSheet, Alert } from "react-native";
-import api from "./src/services/api"; // importa o axios configurado
+import api from "./src/services/api"; 
 
 export default function App() {
   const [quantidade, setQuantidade] = useState("1");
@@ -8,16 +8,13 @@ export default function App() {
 
   async function buscarDogs() {
   try {
-    // Garantir que quantidade seja um número
     const numQuantidade = parseInt(quantidade);
 
-    // Verificar se o número é válido
     if (!quantidade || isNaN(numQuantidade) || numQuantidade <= 0) {
       Alert.alert("Número inválido", "Digite um valor maior que 0");
       return;
     }
 
-    // Passa o número para a API
     const response = await api.get(`/image/random/${numQuantidade}`);
 
     setImagens(response.data.message);
